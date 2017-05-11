@@ -4,6 +4,7 @@ package hackeru.edu.fragments;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -74,6 +75,13 @@ public class ColorFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
         }
 
         userIsCurrentlyScrolling = false;
+
+        notifyListener(color);
+    }
+
+    private void notifyListener(int color) {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.onColorChanged(color);
     }
 
 

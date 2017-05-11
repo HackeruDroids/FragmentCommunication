@@ -1,5 +1,6 @@
 package hackeru.edu.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,13 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class TheMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
+    ColorFragment f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_main);
-
+        f = new ColorFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.content, new ColorFragment()).commit();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -22,9 +23,9 @@ public class TheMainActivity extends AppCompatActivity implements BottomNavigati
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.navigation_color:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content, new ColorFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content, f).commit();
                 break;
             case R.id.navigation_culinary:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content, new CulinaryFragment()).commit();
