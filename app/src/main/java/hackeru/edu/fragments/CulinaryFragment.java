@@ -15,7 +15,7 @@ import java.util.Random;
  * A simple {@link Fragment} subclass.
  */
 public class CulinaryFragment extends Fragment implements View.OnClickListener {
-    private TextView tvCulinary;
+    TextView tvCulinary;
     String[] culinaryInspirations = new String[]{
             "Nachos smoothie has to have a dried, gooey ginger component.",
             "Instead of varnishing hardened emeril's essence with nachos, use one container BBQ sauce and twelve oz anise grinder.",
@@ -43,5 +43,9 @@ public class CulinaryFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         culinary();
+    }
+
+    public void changeTextColor(int color) {
+        tvCulinary.setTextColor(color);
     }
 }

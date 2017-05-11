@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,12 +29,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onColorChanged(int color) {
+        //get a reference to the fragmentManager (Manages all the fragments.)
         FragmentManager fragmentManager = getSupportFragmentManager();
-        ColorFragment colorFragment = (ColorFragment) fragmentManager.findFragmentById(R.id.colorFragment);
-        CulinaryFragment culinaryFragment = (CulinaryFragment) fragmentManager.findFragmentById(R.id.culinaryFragment);
 
+        //findFragmentById with casting.
+        CulinaryFragment culinaryFragment = (CulinaryFragment)
+                fragmentManager.findFragmentById(R.id.culinaryFragment);
 
-
+        //call a method on the fragment (*notify about the new color).
+        culinaryFragment.changeTextColor(color);
+        //culinaryFragment.tvCulinary.setTextColor(color);
 
     }
 }
