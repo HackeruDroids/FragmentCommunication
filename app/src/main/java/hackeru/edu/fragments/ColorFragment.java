@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,13 +77,34 @@ public class ColorFragment extends Fragment implements SeekBar.OnSeekBarChangeLi
 
         userIsCurrentlyScrolling = false;
 
-        notifyListener(color);
+        if (getActivity() instanceof OnColorChangedListener){
+            OnColorChangedListener a = (OnColorChangedListener) getActivity();
+            a.onColorChanged(color);
+        }
+
+//        MainActivity a = (MainActivity) getActivity();
+//        a.onColorChanged(color);
     }
 
-    private void notifyListener(int color) {
-        MainActivity activity = (MainActivity) getActivity();
-        activity.onColorChanged(color);
+    public interface OnColorChangedListener {
+        void onColorChanged(int color);
     }
+
+
+
+
+    private void notifyListener(int color) {
+        if (getActivity() instanceof OnColorChangedListener)
+            listener = (OnColorChangedListener) getActivity();
+
+        if (listener != null) {
+            listener.onColorChanged(color);
+        }
+    }
+
+
+    OnColorChangedListener listener = null;
+
 
 
     @Override

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ColorFragment.OnColorChangedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+//
+//    @Override
+//    public void onColorChanged(int color) {
+//        //get a reference to the fragmentManager (Manages all the fragments.)
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        //findFragmentById with casting.
+//        CulinaryFragment culinaryFragment = (CulinaryFragment)
+//                fragmentManager.findFragmentById(R.id.culinaryFragment);
+//
+//        //call a method on the fragment (*notify about the new color).
+//        culinaryFragment.changeTextColor(color);
+//        //culinaryFragment.tvCulinary.setTextColor(color);
+//    }
     public void timer(View view) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -28,17 +41,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No Timer intent on device", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void onColorChanged(int color) {
-        //get a reference to the fragmentManager (Manages all the fragments.)
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        CulinaryFragment f = (CulinaryFragment) getSupportFragmentManager().
+                findFragmentById(R.id.culinaryFragment);
 
-        //findFragmentById with casting.
-        CulinaryFragment culinaryFragment = (CulinaryFragment)
-                fragmentManager.findFragmentById(R.id.culinaryFragment);
+        //f.tvCulinary.setTextColor(color);
 
-        //call a method on the fragment (*notify about the new color).
-        culinaryFragment.changeTextColor(color);
-        //culinaryFragment.tvCulinary.setTextColor(color);
-
+        f.changeTextColor(color);
     }
 }
